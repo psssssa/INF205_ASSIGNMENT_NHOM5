@@ -1,0 +1,51 @@
+﻿@model MvcApplication3.invoice_detail
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>invoice_detail</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.invoice_id, "invoice")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("invoice_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.invoice_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.product_id, "product")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("product_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.product_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.quantity)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.quantity)
+            @Html.ValidationMessageFor(model => model.quantity)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
