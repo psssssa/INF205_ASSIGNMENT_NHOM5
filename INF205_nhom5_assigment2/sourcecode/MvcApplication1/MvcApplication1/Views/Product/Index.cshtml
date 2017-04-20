@@ -1,0 +1,107 @@
+﻿@using PagedList; 
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MvcApplication1.product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="hund">
+    <thead>
+        <tr>
+         <th>
+            @Html.DisplayNameFor(model => model.First().id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().category.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().sku)
+        </th>
+        <th style="width:10%">
+            @Html.DisplayNameFor(model => model.First().img)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().sale_price)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sku)
+        </td>
+        <td>
+            <img src="~/Images/@item.img" style="width:100%"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sale_price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id },new {@class= "btn btn-success"})
+            @Html.ActionLink("Details", "Details", new { id=item.id },new {@class= "btn btn-primary"})
+            @Html.ActionLink("Delete", "Delete", new { id=item.id },new {@class= "btn btn-danger"})
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+ to 
+@Html.PagedListPager( Model, page => Url.Action("Index", new { page }) )

@@ -1,0 +1,50 @@
+﻿@using PagedList; 
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MvcApplication1.invoice_detail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().invoice.invoice_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().product.sku)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.invoice.invoice_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.sku)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id },new {@class= "btn btn-success"}) |
+            @Html.ActionLink("Details", "Details", new { id=item.id },new {@class= "btn btn-primary"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id },new {@class= "btn btn-danger"})
+        </td>
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+ to 
+@Html.PagedListPager( Model, page => Url.Action("Index", new { page }) )

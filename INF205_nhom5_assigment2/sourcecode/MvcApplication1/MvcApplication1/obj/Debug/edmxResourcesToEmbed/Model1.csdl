@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INF205_ASS1_NHOM_5Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="parent_category_id" Type="Int32" />
+    <NavigationProperty Name="products" Relationship="Self.product_category_product" FromRole="category" ToRole="product" />
+    <NavigationProperty Name="category1" Relationship="Self.product_category_product_category" FromRole="category" ToRole="category1" />
+    <NavigationProperty Name="category2" Relationship="Self.product_category_product_category" FromRole="category1" ToRole="category" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sex" Type="Byte" Nullable="false" />
+    <Property Name="job" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="invoices" Relationship="Self.invoice_customer" FromRole="customer" ToRole="invoice" />
+  </EntityType>
+  <EntityType Name="invoice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="invoice_name" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total_price" Type="Int32" Nullable="false" />
+    <Property Name="unit" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="create_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="customer_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="customer" Relationship="Self.invoice_customer" FromRole="invoice" ToRole="customer" />
+    <NavigationProperty Name="invoice_detail" Relationship="Self.purchase_purchase_item" FromRole="invoice" ToRole="invoice_detail" />
+  </EntityType>
+  <EntityType Name="invoice_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="invoice_id" Type="Int32" Nullable="false" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="invoice" Relationship="Self.purchase_purchase_item" FromRole="invoice_detail" ToRole="invoice" />
+    <NavigationProperty Name="product" Relationship="Self.product_purchase_item" FromRole="invoice_detail" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="sku" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="weight" Type="Int32" Nullable="false" />
+    <Property Name="unit" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="sale_price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="Self.product_category_product" FromRole="product" ToRole="category" />
+    <NavigationProperty Name="invoice_detail" Relationship="Self.product_purchase_item" FromRole="product" ToRole="invoice_detail" />
+  </EntityType>
+  <Association Name="product_category_product">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="product_category_product_category">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="category1" Type="Self.category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="category1">
+        <PropertyRef Name="parent_category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="invoice_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="invoice">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="purchase_purchase_item">
+    <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
+    <End Role="invoice_detail" Type="Self.invoice_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="invoice">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="invoice_detail">
+        <PropertyRef Name="invoice_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="product_purchase_item">
+    <End Role="product" Type="Self.product" Multiplicity="1" />
+    <End Role="invoice_detail" Type="Self.invoice_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="invoice_detail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="INF205_ASS1_NHOM_5Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="invoices" EntityType="Self.invoice" />
+    <EntitySet Name="invoice_detail" EntityType="Self.invoice_detail" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <AssociationSet Name="product_category_product" Association="Self.product_category_product">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="product_category_product_category" Association="Self.product_category_product_category">
+      <End Role="category" EntitySet="categories" />
+      <End Role="category1" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="invoice_customer" Association="Self.invoice_customer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="invoice" EntitySet="invoices" />
+    </AssociationSet>
+    <AssociationSet Name="purchase_purchase_item" Association="Self.purchase_purchase_item">
+      <End Role="invoice" EntitySet="invoices" />
+      <End Role="invoice_detail" EntitySet="invoice_detail" />
+    </AssociationSet>
+    <AssociationSet Name="product_purchase_item" Association="Self.product_purchase_item">
+      <End Role="product" EntitySet="products" />
+      <End Role="invoice_detail" EntitySet="invoice_detail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
