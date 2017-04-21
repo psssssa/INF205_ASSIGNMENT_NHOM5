@@ -18,6 +18,7 @@ namespace MvcApplication1.Controllers
 
         public ActionResult Index(int? page)
         {
+            //abc
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             var categories = db.categories.Include(c => c.category2).OrderBy(i => i.id);

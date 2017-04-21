@@ -14,6 +14,7 @@ namespace MvcApplication1.Controllers
         private INF205_ASS1_NHOM_5Entities db = new INF205_ASS1_NHOM_5Entities();
         public ActionResult Index()
         {
+            //abc
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             var products = db.products.Include
                 (p => p.category).OrderBy(i => i.id).Take(4);
