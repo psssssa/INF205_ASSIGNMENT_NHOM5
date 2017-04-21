@@ -1,0 +1,39 @@
+﻿@model MvcApplication1.invoice_detail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>invoice_detail</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.invoice.invoice_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.invoice.invoice_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.product.sku)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.product.sku)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.quantity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.quantity)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

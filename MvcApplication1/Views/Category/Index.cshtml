@@ -1,0 +1,44 @@
+﻿@using PagedList; 
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MvcApplication1.category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null,new {@class= "btn btn-success"})
+</p>
+<table class="table table-strip">
+    <thead>
+        <th>
+            @Html.DisplayNameFor(model => model.First().name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().category2.name)
+        </th>
+        <th></th>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category2.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id},new {@class= "btn btn-success"}) |
+            @Html.ActionLink("Details", "Details", new { id=item.id} ,new {@class= "btn btn-primary"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id },new {@class= "btn btn-danger"})
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+ to 
+@Html.PagedListPager( Model, page => Url.Action("Index", new { page }) )

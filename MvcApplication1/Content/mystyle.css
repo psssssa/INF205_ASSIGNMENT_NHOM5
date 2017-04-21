@@ -1,0 +1,135 @@
+.shadow{width:82%; float:left;box-shadow:0 0 10px #000;}
+.img-wrap-tailor a{display:block}
+.img-wrap-tailor{    width: 100%;
+float: left;
+overflow: hidden;
+height: 300px;
+position: relative;}
+.img-wrap-tailor span{    position: absolute;
+background: #ff6600;
+width: 100%;
+left: 0;
+bottom: 0;
+text-align: center;
+padding: 5px 0;
+font-size: 19px;
+color: #fff;}
+.box-customn{    width: 100%;
+float: left;
+border: 1px solid #ccc;
+margin: 15px 0;box-shadow:0 0 5px #000;}
+.box-customn .imfo-area{width:100%; float:left;text-align:center;}
+.box-customn .imfo-area h3{    margin: 0px;
+padding: 0px;
+color: #0c0c0c;
+font-size: 21px;
+line-height: 30px;
+font-weight: 600;
+text-transform: uppercase;}
+.box-customn .imfo-area p{margin: 0px;padding:5px 0px;font-size:14px;}
+.box-customn .imfo-area h4{color: #ff0000;
+font-weight: bold;
+line-height: 30px;
+font-size: 25px;}
+.img-wrap-tailor img{max-width:100%;}
+.box-customn a.onhover{display:none;}
+.box-customn:hover a.onhover{display:block;position:absolute;top:0px;left:0px;}
+.box-customn:hover a.nohover{display:none;}
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle 300px at 50%, #FFFFF8 10%, #C4D7ED);
+}
+
+/* START NAVBAR */
+nav {
+  width: 70%;
+  margin: 0 auto;
+}
+
+nav .menu {
+  height: 60px;
+  background: #36363f;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  text-align: center; /* center the li */
+}
+
+nav .menu li {
+  display: inline-block; 
+}
+
+nav .menu li a {
+  font-family: arial, sans-serif;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 60px;
+  vertical-align: middle;
+  padding: 20px;
+  transition: all 0.5s;
+}
+
+nav .menu li:hover > a {
+  background: #25252B;
+  transition: all 0.5s;
+  color: #ccc;
+}
+
+/* sub-menus */
+
+.menu li > ul {
+  position: absolute;
+  margin-left: -2.21%;
+  display: none;
+  animation: slide 0.1s linear 0s normal;
+  z-index:999;
+}
+
+.menu li > ul > li {
+  display: block;
+  background: #25252b;
+  border-top: 1px solid #25252f;
+}
+
+.menu li > ul > li > a {
+  display: block;
+  padding: 5px 12px;
+}
+
+.menu li:hover > ul {
+  display: block;
+  animation: slide 0.1s linear 0s normal;
+}
+
+.menu li:hover > ul li:hover > a {
+  background: #18181F;
+}
+
+
+
+@keyframes slide {
+  from  { transform: rotateY(35deg) skewX(10deg); }
+  to     { transform: rotateY(0deg) skewX(0deg); }
+}
+
+#login a {
+    color:#fff !important;
+    background-color:#36363f !important;
+}
+ thead > tr > th, tbody > tr > th, tfoot > tr > th, thead > tr > td, tbody > tr > td, tfoot > tr > td {
+    font-weight:bolder;
+    font-size:200%;
+}
+
+.hund > thead > tr > th, .hund > tbody > tr > td {
+    font-size: 100% !important;
+}
+
+.hund > thead > tr > th {
+    font-size:100% !important;
+}
