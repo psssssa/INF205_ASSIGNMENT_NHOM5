@@ -415,6 +415,7 @@
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Category\Error.cshtml" />
+    <Content Include="Views\Product\Error.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -98,6 +98,11 @@ namespace MvcApplication1.Controllers
         public ActionResult Delete(int id = 0)
         {
             product product = db.products.Find(id);
+            var detail_product = db.invoice_detail.Where(i => i.product_id == id).Count();
+            if (detail_product > 0)
+            {
+                return RedirectToAction("Error");
+            }
             if (product == null)
             {
                 return HttpNotFound();
@@ -111,6 +116,7 @@ namespace MvcApplication1.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             product product = db.products.Find(id);
             db.products.Remove(product);
             db.SaveChanges();
@@ -121,6 +127,10 @@ namespace MvcApplication1.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        public ActionResult Error()
+        {
+            return View(); 
         }
     }
 }
